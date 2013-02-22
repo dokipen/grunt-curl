@@ -9,6 +9,14 @@
 var fs = require('fs'),
     path = require('path'),
     request = require('request');
+    curl = function (url, cb) {
+      // Request the url
+      console.error('fetching ', url)
+      request.get({'url': url, 'encoding': 'binary'}, function (err, res, body) {
+        // Callback with the error and body
+        cb(err, body);
+      });
+    }
 module.exports = function (grunt) {
 
   // Please see the grunt documentation for more information regarding task and
@@ -20,10 +28,9 @@ module.exports = function (grunt) {
 
   grunt.registerMultiTask('curl', 'Download files from the internet via grunt.', function () {
     // Collect the filepaths we need
-    var file = this.file,
-        data = this.data,
-        src = file.src,
-        dest = file.dest,
+    var data = this.data,
+        src = data.src,
+        dest = data.dest,
         done = this.async(),
         that = this;
 
@@ -34,8 +41,8 @@ module.exports = function (grunt) {
     }
 
     // Asynchronously fetch the files in parallel
-    var async = grunt.utils.async;
-    async.map(srcFiles, grunt.helper.bind(grunt, 'curl'), curlResultFn);
+    var async = grunt.util.async;
+    async.map(srcFiles, curl, curlResultFn);
 
     function curlResultFn(err, files) {
       // If there is an error, fail
@@ -66,10 +73,9 @@ module.exports = function (grunt) {
   var defaultRouter = path.basename;
   grunt.registerMultiTask('curl-dir', 'Download collections of files from the internet via grunt.', function () {
     // Collect the filepaths we need
-    var file = this.file,
-        src = file.src,
-        dest = file.dest,
-        data = this.data,
+    var data = this.data,
+        src = data.src,
+        dest = data.dest,
         router = data.router || defaultRouter,
         done = this.async(),
         that = this;
@@ -81,7 +87,7 @@ module.exports = function (grunt) {
     }
 
     // Iterate over the array and expand the braces
-    var minimatch = grunt.file.glob.minimatch,
+    var minimatch = grunt.file.minimatch,
         braceExpand = minimatch.braceExpand;
     srcFiles = srcFiles.reduce(function expandSrcFiles (retArr, srcFile) {
       var srcFileArr = braceExpand(srcFile);
@@ -90,8 +96,8 @@ module.exports = function (grunt) {
     }, []);
 
     // Asynchronously fetch the files in parallel
-    var async = grunt.utils.async;
-    async.map(srcFiles, grunt.helper.bind(grunt, 'curl'), curlResultFn);
+    var async = grunt.util.async;
+    async.map(srcFiles, curl, curlResultFn);
 
     function curlResultFn(err, files) {
       // If there is an error, fail
@@ -125,18 +131,6 @@ module.exports = function (grunt) {
       // Callback
       done();
     }
-  });
-
-  // ==========================================================================
-  // HELPERS
-  // ==========================================================================
-
-  grunt.registerHelper('curl', function (url, cb) {
-    // Request the url
-    request.get({'url': url, 'encoding': 'binary'}, function (err, res, body) {
-      // Callback with the error and body
-      cb(err, body);
-    });
   });
 
 };

@@ -29,16 +29,16 @@ exports['curl'] = {
   'js': function(test) {
     test.expect(1);
     // tests here
-    var expectedContent = grunt.file.read('expected/file.js'),
-        actualContent = grunt.file.read('actual/file.js');
+    var expectedContent = grunt.file.read('test/expected/file.js'),
+        actualContent = grunt.file.read('test/actual/file.js');
     test.equal(actualContent, expectedContent, 'should return the correct value.');
     test.done();
   },
   'zip': function(test) {
     test.expect(1);
     // tests here
-    var expectedContent = fs.readFileSync('expected/file.zip', 'binary'),
-        actualContent = fs.readFileSync('actual/file.zip', 'binary');
+    var expectedContent = fs.readFileSync('test/expected/file.zip', 'binary'),
+        actualContent = fs.readFileSync('test/actual/file.zip', 'binary');
     test.equal(actualContent, expectedContent, 'should return the correct value.');
     test.done();
   }

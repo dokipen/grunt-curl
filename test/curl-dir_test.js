@@ -29,12 +29,12 @@ exports['curl-dir'] = {
   'multi': function(test) {
     test.expect(2);
     // tests here
-    var expectedLabContent = grunt.file.read('expected/file.js'),
-        actualLabContent = grunt.file.read('actual/multi/LAB.min.js');
+    var expectedLabContent = grunt.file.read('test/expected/file.js'),
+        actualLabContent = grunt.file.read('test/actual/multi/LAB.min.js');
     test.equal(actualLabContent, expectedLabContent, 'should return the correct value for LAB.min.js.');
 
-    var expectedCookiejarContent = grunt.file.read('expected/cookiejar.js'),
-        actualCookiejarContent = grunt.file.read('actual/multi/cookiejar.js');
+    var expectedCookiejarContent = grunt.file.read('test/expected/cookiejar.js'),
+        actualCookiejarContent = grunt.file.read('test/actual/multi/cookiejar.js');
     test.equal(actualLabContent, expectedLabContent, 'should return the correct value for cookiejar.js.');
 
     test.done();
@@ -42,12 +42,12 @@ exports['curl-dir'] = {
   'braceExpansion': function(test) {
     test.expect(2);
     // tests here
-    var expectedLabContent = grunt.file.read('expected/file.js'),
-        actualLabContent = grunt.file.read('actual/braceExpansion/LAB.min.js');
+    var expectedLabContent = grunt.file.read('test/expected/file.js'),
+        actualLabContent = grunt.file.read('test/actual/braceExpansion/LAB.min.js');
     test.equal(actualLabContent, expectedLabContent, 'should return the correct value for LAB.min.js.');
 
-    var expectedCookiejarContent = grunt.file.read('expected/cookiejar.js'),
-        actualCookiejarContent = grunt.file.read('actual/braceExpansion/cookiejar.js');
+    var expectedCookiejarContent = grunt.file.read('test/expected/cookiejar.js'),
+        actualCookiejarContent = grunt.file.read('test/actual/braceExpansion/cookiejar.js');
     test.equal(actualLabContent, expectedLabContent, 'should return the correct value for cookiejar.js.');
 
     test.done();
@@ -55,12 +55,12 @@ exports['curl-dir'] = {
   'router': function(test) {
     test.expect(2);
     // tests here
-    var expectedLabContent = grunt.file.read('expected/file.js'),
-        actualLabContent = grunt.file.read('actual/router/ajax/libs/labjs/2.0.3/LAB.min.js');
+    var expectedLabContent = grunt.file.read('test/expected/file.js'),
+        actualLabContent = grunt.file.read('test/actual/router/ajax/libs/labjs/2.0.3/LAB.min.js');
     test.equal(actualLabContent, expectedLabContent, 'should return the correct value for LAB.min.js.');
 
-    var expectedCookiejarContent = grunt.file.read('expected/cookiejar.js'),
-        actualCookiejarContent = grunt.file.read('actual/router/ajax/libs/cookiejar/0.5/cookiejar.js');
+    var expectedCookiejarContent = grunt.file.read('test/expected/cookiejar.js'),
+        actualCookiejarContent = grunt.file.read('test/actual/router/ajax/libs/cookiejar/0.5/cookiejar.js');
     test.equal(actualLabContent, expectedLabContent, 'should return the correct value for cookiejar.js.');
 
     test.done();
