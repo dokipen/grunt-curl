@@ -11,7 +11,6 @@ var fs = require('fs'),
     request = require('request');
     curl = function (url, cb) {
       // Request the url
-      console.error('fetching ', url)
       request.get({'url': url, 'encoding': 'binary'}, function (err, res, body) {
         // Callback with the error and body
         cb(err, body);
